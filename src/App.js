@@ -4,9 +4,6 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
 
-//jatka tehtävää 5.4: lisää hälytykset blogin luomiseen
-//tutki, miksi hälytyksen tyyli ei toimi
-
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [newTitle, setNewTitle] = useState('')
@@ -64,6 +61,10 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      setAttentionMessage(`logges in as ${user.name}`)
+      setTimeout(() => {
+        setAttentionMessage(null)
+      }, 5000)
     } catch (exception) {
       console.log('wrong credentials')
       setAlertMessage('Wrong credentials')
@@ -73,10 +74,14 @@ const App = () => {
     }
   }
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     console.log('logging out')
     window.localStorage.removeItem('loggedNoteappUser')
     setUser(null)
+    setAttentionMessage('you have been successfully logged out')
+    setTimeout(() => {
+      setAttentionMessage(null)
+    }, 5000)
   }
 
   const loginForm = () => (
@@ -117,11 +122,26 @@ const App = () => {
       url: newUrl
     }
 
-    const returnedBlog = await blogService.create(blogObject)
-    setBlogs(blogs.concat(returnedBlog))
-    setNewTitle('')
-    setNewAuthor('')
-    setNewUrl('')
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+
+      setNewTitle('')
+      setNewAuthor('')
+      setNewUrl('')
+      setAttentionMessage(
+        `a new blog "${returnedBlog.title}" by ${returnedBlog.author} added`
+      )
+      setTimeout(() => {
+        setAttentionMessage(null)
+      }, 5000)
+    } catch (exception) {
+      console.log(exception.message)
+      setAlertMessage('creating new failed')
+      setTimeout(() => {
+        setAlertMessage(null)
+      }, 5000)
+    }
   }
 
   const blogForm = () => (
