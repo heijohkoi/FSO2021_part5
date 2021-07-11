@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -18,6 +19,8 @@ const App = () => {
 
   const [alertMessage, setAlertMessage] = useState(null)
   const [attentionMessage, setAttentionMessage] = useState(null)
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -96,6 +99,7 @@ const App = () => {
 
   const addBlog = async (event) => {
     event.preventDefault()
+    blogFormRef.current.toggleVisibility()
     const blogObject = {
       title: newTitle,
       author: newAuthor,
@@ -123,6 +127,20 @@ const App = () => {
       }, 5000)
     }
   }
+
+  const blogForm = () => (
+    <Togglable buttonLabel="create new blog" ref={blogFormRef}>
+      <BlogForm
+        addBlog={addBlog}
+        newTitle={newTitle}
+        titleHandler={handleTitleChange}
+        newAuthor={newAuthor}
+        authorHandler={handleAuthorChange}
+        newUrl={newUrl}
+        urlHandler={handleUrlChange}
+      />
+    </Togglable>
+  )
 
   return (
     <div>
@@ -153,15 +171,7 @@ const App = () => {
             <button onClick={handleLogout}>logout</button>
           </p>
           <h2>create new</h2>
-          <BlogForm
-            addBlog={addBlog}
-            newTitle={newTitle}
-            titleHandler={handleTitleChange}
-            newAuthor={newAuthor}
-            authorHandler={handleAuthorChange}
-            newUrl={newUrl}
-            urlHandler={handleUrlChange}
-          />
+          {blogForm()}
           {blogs.map((blog) => (
             <Blog key={blog.id} blog={blog} />
           ))}
