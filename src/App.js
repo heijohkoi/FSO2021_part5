@@ -82,6 +82,17 @@ const App = () => {
     }, 5000)
   }
 
+  const handleDeleteClick = async (id) => {
+    const response = await blogService.deleteId(id)
+    if (response === true) {
+      setBlogs(blogs.filter((b) => b.id !== id))
+      setAttentionMessage('Blog deleted')
+      setTimeout(() => {
+        setAttentionMessage(null)
+      }, 5000)
+    }
+  }
+
   const addBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
 
@@ -145,6 +156,8 @@ const App = () => {
                 key={blog.id}
                 blog={blog}
                 setAlertMessage={setAlertMessage}
+                deleteBlog={handleDeleteClick}
+                user={user}
               />
             ))}
         </div>
