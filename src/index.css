@@ -1,3 +1,7 @@
+.h2 body {
+  font-family: Verdana, sans-serif;
+}
+
 .alert {
   color: red;
   background: lightgray;
@@ -40,4 +44,35 @@
 .active,
 .collapsible:hover {
   background-color: #555;
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: rgb(79, 81, 211);
+  border: none;
+  border-radius: 6px;
+  transition-duration: 0.4s;
+  margin: 2px;
+}
+
+.button:hover {
+  background-color: #bdbdbd;
+}
+
+input {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px;
+  margin: 5px 5px;
 }
