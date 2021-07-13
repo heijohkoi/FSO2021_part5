@@ -73,7 +73,6 @@ const App = () => {
   }
 
   const handleLogout = () => {
-    console.log('logging out')
     window.localStorage.removeItem('loggedNoteappUser')
     setUser(null)
     setAttentionMessage('you have been successfully logged out')

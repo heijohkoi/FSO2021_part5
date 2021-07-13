@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
   const [viewFullBlog, setViewFullBlog] = useState(false)
@@ -28,6 +29,13 @@ const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
         setAlertMessage(null)
       }, 5000)
     }
+  }
+
+  Blog.propTypes = {
+    blog: PropTypes.object.isRequired,
+    setAlertMessage: PropTypes.func.isRequired,
+    deleteBlog: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   }
 
   return (
