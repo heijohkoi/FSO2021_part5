@@ -27,7 +27,7 @@ const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
       setAlertMessage('updating likes failed')
       setTimeout(() => {
         setAlertMessage(null)
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -48,7 +48,10 @@ const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
           <div className="blogContent">
             <a href={blog.url}>{blog.url}</a>
             <br />
-            {likes} <button onClick={handleLikeClick}>like</button>
+            {likes}{' '}
+            <button onClick={handleLikeClick} className="likeButton">
+              like
+            </button>
             <br />
             {blog.user.name}
             <br />
@@ -61,6 +64,7 @@ const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
                     ? deleteBlog(blog.id)
                     : null
                 }}
+                className="deleteButton"
               >
                 remove
               </button>

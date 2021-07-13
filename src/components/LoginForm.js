@@ -11,20 +11,20 @@ const LoginForm = ({
   return (
     <form onSubmit={loginHandler}>
       <div>
-        username:{' '}
         <input
           type="text"
           value={username}
           name="Username"
+          placeholder="Username"
           onChange={nameHandler}
         />
       </div>
       <div>
-        password:{' '}
         <input
           type="password"
           value={password}
           name="Password"
+          placeholder="Password"
           onChange={passwordHandler}
         />
       </div>

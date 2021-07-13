@@ -62,13 +62,13 @@ const App = () => {
       setAttentionMessage(`logged in as ${user.name}`)
       setTimeout(() => {
         setAttentionMessage(null)
-      }, 5000)
+      }, 3000)
     } catch (exception) {
       console.log('wrong credentials')
       setAlertMessage('Wrong credentials')
       setTimeout(() => {
         setAlertMessage(null)
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -78,7 +78,7 @@ const App = () => {
     setAttentionMessage('you have been successfully logged out')
     setTimeout(() => {
       setAttentionMessage(null)
-    }, 5000)
+    }, 3000)
   }
 
   const handleDeleteClick = async (id) => {
@@ -88,7 +88,7 @@ const App = () => {
       setAttentionMessage('Blog deleted')
       setTimeout(() => {
         setAttentionMessage(null)
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -103,13 +103,13 @@ const App = () => {
       )
       setTimeout(() => {
         setAttentionMessage(null)
-      }, 5000)
+      }, 3000)
     } catch (exception) {
       console.log(exception.message)
       setAlertMessage('creating new failed')
       setTimeout(() => {
         setAlertMessage(null)
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -144,7 +144,8 @@ const App = () => {
             attention={attentionMessage}
           />
           <p>
-            {user.name} logged in{' '}
+            {user.name} logged in
+            <br />
             <button onClick={handleLogout} className="button">
               logout
             </button>
