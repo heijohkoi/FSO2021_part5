@@ -3,9 +3,17 @@
   text-align: center;
 }
 
-h1,
+h1 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 50px;
+}
+
 h2 {
-  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 300;
   font-size: 50px;
 }
 
@@ -15,6 +23,9 @@ p,
   padding: 10px;
   border-radius: 5px;
   font-size: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a:link {
@@ -29,31 +40,6 @@ a:visited {
 
 a:hover {
   color: #777;
-}
-
-.blogContent {
-  padding: 10px 18px 10px;
-  background-color: #bebebe;
-  text-align: center;
-}
-
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  text-align: center;
-  transition-duration: 0.2s;
-}
-
-.active,
-.collapsible:hover {
-  background-color: #555;
 }
 
 .button {
@@ -127,6 +113,43 @@ input {
   margin: 5px 5px;
 }
 
+/* || collabsible blog content */
+.blogArea {
+  padding: 3px;
+  background-color: white;
+  border: solid;
+  border-width: 5px;
+  border-color: #bebebe;
+  border-radius: 5px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.blogContent {
+  padding: 10px;
+  background-color: #bebebe;
+  text-align: center;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  text-align: center;
+  transition-duration: 0.2s;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #555;
+}
+
+/* || pop-up notification */
 .overlay {
   position: fixed;
   top: 0;
@@ -135,10 +158,6 @@ input {
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
-  visibility: visible;
-  opacity: 1;
-}
-.overlay:target {
   visibility: visible;
   opacity: 1;
 }

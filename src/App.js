@@ -151,17 +151,19 @@ const App = () => {
             </button>
           </p>
           {blogForm()}
-          {blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map((blog) => (
-              <Blog
-                key={blog.id}
-                blog={blog}
-                setAlertMessage={setAlertMessage}
-                deleteBlog={handleDeleteClick}
-                user={user}
-              />
-            ))}
+          <div className="blogArea">
+            {blogs
+              .sort((a, b) => b.likes - a.likes)
+              .map((blog) => (
+                <Blog
+                  key={blog.id}
+                  blog={blog}
+                  setAlertMessage={setAlertMessage}
+                  deleteBlog={handleDeleteClick}
+                  user={user}
+                />
+              ))}
+          </div>
         </div>
       )}
     </div>
