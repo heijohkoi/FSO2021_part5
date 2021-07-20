@@ -92,6 +92,18 @@ const App = () => {
     }
   }
 
+  const handleLikeUpdate = async (blogObject, blogId) => {
+    try {
+      blogService.like(blogObject, blogId)
+    } catch (exception) {
+      setAlertMessage('updating likes failed')
+      setTimeout(() => {
+        setAlertMessage(null)
+      }, 3000)
+      return exception
+    }
+  }
+
   const addBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
 
@@ -143,13 +155,13 @@ const App = () => {
             alert={alertMessage}
             attention={attentionMessage}
           />
-          <p>
+          <div className="infoArea">
             {user.name} logged in
             <br />
             <button onClick={handleLogout} className="button">
               logout
             </button>
-          </p>
+          </div>
           {blogForm()}
           <div className="blogArea">
             {blogs
@@ -158,8 +170,8 @@ const App = () => {
                 <Blog
                   key={blog.id}
                   blog={blog}
-                  setAlertMessage={setAlertMessage}
                   deleteBlog={handleDeleteClick}
+                  updateLikes={handleLikeUpdate}
                   user={user}
                 />
               ))}

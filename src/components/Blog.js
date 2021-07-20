@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
+const Blog = ({ blog, deleteBlog, updateLikes, user }) => {
   const [viewFullBlog, setViewFullBlog] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
 
@@ -10,31 +9,30 @@ const Blog = ({ blog, setAlertMessage, deleteBlog, user }) => {
     setViewFullBlog(!viewFullBlog)
   }
 
-  const handleLikeClick = async () => {
-    const blogObject = {
-      user: blog.user._id,
-      title: blog.title,
-      author: blog.author,
-      url: blog.url,
-      likes: likes + 1
-    }
+  const handleLikeClick = (event) => {
+    event.preventDefault()
 
     try {
-      await blogService.like(blogObject, blog.id)
+      updateLikes(
+        {
+          user: blog.user._id,
+          title: blog.title,
+          author: blog.author,
+          url: blog.url,
+          likes: likes + 1
+        },
+        blog.id
+      )
       setLikes(likes + 1)
     } catch (exception) {
       console.log(exception.message)
-      setAlertMessage('updating likes failed')
-      setTimeout(() => {
-        setAlertMessage(null)
-      }, 3000)
     }
   }
 
   Blog.propTypes = {
     blog: PropTypes.object.isRequired,
-    setAlertMessage: PropTypes.func.isRequired,
     deleteBlog: PropTypes.func.isRequired,
+    updateLikes: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
   }
 
