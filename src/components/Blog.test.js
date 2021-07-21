@@ -31,7 +31,7 @@ describe('viewing a blog', () => {
     expect(component.container).not.toHaveTextContent('6')
   })
 
-  test('clicking the button show full info', async () => {
+  test('clicking title show full info of a blog', async () => {
     const blog = {
       title: 'Introducing the New React DevTools',
       author: 'Brian Vaughn',
