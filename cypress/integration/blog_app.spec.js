@@ -105,6 +105,21 @@ describe('Blog app', function () {
           )
           .and('contain', '1')
       })
+
+      it.only('own blog can be deleted', function () {
+        cy.contains(
+          'Ethical design and value-based decisions guiding the work by Suvi Leander'
+        ).click()
+
+        cy.contains('remove').click()
+        cy.get('.attentionContent')
+          .should('contain', 'Blog deleted')
+          .and('have.css', 'color', 'rgb(0, 128, 0)')
+        cy.get('html').should(
+          'not.contain',
+          'Ethical design and value-based decisions guiding the work by Suvi Leander'
+        )
+      })
     })
   })
 })
