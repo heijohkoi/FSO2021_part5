@@ -39,7 +39,7 @@ const Blog = ({ blog, deleteBlog, updateLikes, user }) => {
   return (
     <div>
       {viewFullBlog ? (
-        <div>
+        <div id={blog.title}>
           <button onClick={handleTitleClick} className="collapsible">
             <strong>{blog.title}</strong> by {blog.author}
           </button>

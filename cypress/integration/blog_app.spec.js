@@ -55,16 +55,7 @@ describe('Blog app', function () {
 
   describe('When logged in', function () {
     beforeEach(function () {
-      cy.request('POST', 'http://localhost:3003/api/login/', {
-        username: 'mluukkai',
-        password: 'salainen'
-      }).then((response) => {
-        localStorage.setItem(
-          'loggedBlogappUser',
-          JSON.stringify(response.body)
-        )
-        cy.visit('http://localhost:3000')
-      })
+      cy.login({ username: 'mluukkai', password: 'salainen' })
     })
 
     it('a blog can be created', function () {
@@ -80,6 +71,40 @@ describe('Blog app', function () {
       cy.contains(
         'Disadvantages of Scrum and how to overcome them by Juho Salmi'
       )
+    })
+
+    describe('and a blog exists', function () {
+      beforeEach(function () {
+        cy.createBlog({
+          title:
+            'Ethical design and value-based decisions guiding the work',
+          author: 'Suvi Leander',
+          url: 'https://gofore.com/ethical-design-and-value-based-decisions-guiding-the-work/'
+        })
+      })
+
+      it('a blog can be liked', function () {
+        cy.contains(
+          'Ethical design and value-based decisions guiding the work by Suvi Leander'
+        ).click()
+
+        cy.get('.blogContent')
+          .should(
+            'contain',
+            'https://gofore.com/ethical-design-and-value-based-decisions-guiding-the-work/'
+          )
+          .and('contain', '0')
+          .and('contain', 'like')
+
+        cy.contains('like').click()
+
+        cy.get('.blogContent')
+          .should(
+            'contain',
+            'https://gofore.com/ethical-design-and-value-based-decisions-guiding-the-work/'
+          )
+          .and('contain', '1')
+      })
     })
   })
 })
