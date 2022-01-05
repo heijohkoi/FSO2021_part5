@@ -81,6 +81,16 @@ describe('Blog app', function () {
           author: 'Suvi Leander',
           url: 'https://gofore.com/ethical-design-and-value-based-decisions-guiding-the-work/'
         })
+        cy.createBlog({
+          title: 'Advanced React Hooks: The Strategy Pattern',
+          author: 'Antti Pekka Vilkko',
+          url: 'https://gofore.com/advanced-react-hooks-the-strategy-pattern/'
+        })
+        cy.createBlog({
+          title: 'Devops 101 – Part 3-2: Failure is always an option',
+          author: 'Aki Mäkinen',
+          url: 'https://gofore.com/devops-101-part-3-2-failure-is-always-an-option/'
+        })
       })
 
       it('a blog can be liked', function () {
@@ -106,7 +116,7 @@ describe('Blog app', function () {
           .and('contain', '1')
       })
 
-      it.only('own blog can be deleted', function () {
+      it('own blog can be deleted', function () {
         cy.contains(
           'Ethical design and value-based decisions guiding the work by Suvi Leander'
         ).click()
@@ -120,6 +130,69 @@ describe('Blog app', function () {
           'Ethical design and value-based decisions guiding the work by Suvi Leander'
         )
       })
+      // it.only('blogs are arranged by likes', function () {
+      //   cy.contains(
+      //     'Ethical design and value-based decisions guiding the work by Suvi Leander'
+      //   ).click()
+      //   cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains(
+      //   'Ethical design and value-based decisions guiding the work by Suvi Leander'
+      // ).click()
+
+      // cy.contains(
+      //   'Advanced React Hooks: The Strategy Pattern by Antti Pekka Vilkko'
+      // ).click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains(
+      //   'Advanced React Hooks: The Strategy Pattern by Antti Pekka Vilkko'
+      // ).click()
+
+      // cy.contains(
+      //   'Devops 101 – Part 3-2: Failure is always an option'
+      // ).click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains('like').click()
+      // cy.contains(
+      //   'Devops 101 – Part 3-2: Failure is always an option'
+      // ).click()
+
+      // cy.visit('http://localhost:3000')
+      // cy.contains(
+      //   'Ethical design and value-based decisions guiding the work by Suvi Leander'
+      // ).click()
+      // cy.contains(
+      //   'Advanced React Hooks: The Strategy Pattern by Antti Pekka Vilkko'
+      // ).click()
+      // cy.contains(
+      //   'Devops 101 – Part 3-2: Failure is always an option'
+      // ).click()
+
+      // cy.get('.blogContent').as('blogs')
+      // cy.get('@blogs').then((blogs) => {
+      //   let a = blogs[0].likes
+      //   for (let i = 0; i < blogs.length; i++) {
+      //     if (blogs[i].likes > a) {
+      //       break
+      //     }
+      //     a = blogs[i].likes
+      //   }
+      // })
+      //   cy.get('.blog').then((blogs) => {
+      //     console.log(blogs)
+      //     let a = blogs[0].likes
+      //     for (let i = 0; i < blogs.length; i++) {
+      //       cy.expect(blogs[i].likes).to.be.lessThan(a)
+      //       a = blogs[i].likes
+      //       console.log(a)
+      //     }
+      //   })
+      // })
     })
   })
 })
